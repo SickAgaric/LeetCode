@@ -55,4 +55,20 @@ struct ListNode* removeElements(struct ListNode* head, int val)
 	return head;
 
 }
+struct ListNode *reverseList(struct ListNode *head)
+{
+    struct ListNode *new_head = NULL, *temp = NULL;
+    if (!head || !head->next)
+    {
+        return head;
+    }
+    while (head != NULL)
+    {
+        temp = head->next;     // 临时记录指针一直指向当前节点的下一个结点，防止断链找不到
+        head->next = new_head; // 当前节点的next指针链到新节点上
+        new_head = head;       // 新节点移动到刚才节点上，使得下次能够倒序链接节点
+        head = temp;           // 当前节点移动到一开始保存的下一个结点
+    }
+    return new_head;
+}
 
