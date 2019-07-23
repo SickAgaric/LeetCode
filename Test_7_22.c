@@ -86,7 +86,7 @@ void copyTree(struct TreeNode* root,int* newarr,int* len)
         return newarr;
     
     newarr[*len] = root->val;
-    (*len)++;
+    *len++;
     
     copyTree(root->left,newarr,len);
     copyTree(root->right,newarr,len);
