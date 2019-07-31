@@ -63,7 +63,7 @@ int majorityElement(int* nums, int numsSize){
         
         else
             count--;
-        
+        //用计数器的方法，进行判断
         if(count==0)
             mode = nums[i+1];
     }
@@ -122,7 +122,7 @@ struct ListNode* reverseList(struct ListNode* head)
     
     while(cur)
     {
-        List* _next = cur->next;
+        List* _next = cur->next;//用头插的方法进行链表的逆置
         cur->next = _head;
         _head = cur;
         cur = _next;
@@ -147,9 +147,9 @@ bool isPalindrome(struct ListNode* head){
     while(mid--)
         cur = cur->next;
     List* head1 = head;
-    List* head2 = reverseList(cur);
+    List* head2 = reverseList(cur);//此处应该把中间位置作为参数，进行传参，然后得到的结果为后半段逆置完成的链表
     
-    mid = size/2;
+    mid = size/2;//此处如果不重新赋值mid，会导致下边的while循环直接不进行
     
     while(mid--)
     {
@@ -211,9 +211,9 @@ char * removeOuterParentheses(char * S){
         else
             sum-=1;
         
-        if(S[i]=='('&&sum>1)
+        if(S[i]=='('&&sum>1)//从要删除的括号下一个开始保存
         {
-            S[j] = '(';
+            S[j] = '(';//此处可以覆盖，因为i总是会大于j，覆盖不会出现重叠问题
             j++;
 
         }
@@ -224,7 +224,7 @@ char * removeOuterParentheses(char * S){
         }
         
     }
-    S[j] = '\0';
+    S[j] = '\0';//不加'\0'会出现数组的越界
     return S;
 }
 
