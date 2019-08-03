@@ -1,5 +1,6 @@
 int rob(vector<int>& nums) {
 	
+	
 	int sz = nums.size();
 	if (sz == 0) return 0;
 	if (sz == 1) return nums[0];
