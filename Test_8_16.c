@@ -62,38 +62,9 @@
         return q;
     }
 	
-	int rob(int* nums, int numsSize){
-    if(numsSize==0)
-        return 0;
-    else
-    {
-  int *MAX=(int *)malloc(numsSize*sizeof(int));
- for(int i=0;i<numsSize;i++)
-  {
-      if(i==0)
-          MAX[i]=nums[i];
-      else
-      {
-          if(i==1)
-          {
-              if(nums[1]>nums[0])
-                  MAX[1]=nums[1];
-              else
-                  MAX[1]=MAX[0];
-          }
-          else
-          {
-              int result=MAX[i-2]+nums[i];
-              if (result>MAX[i-1])
-              {
-                  MAX[i]=result;
-              }
-              else
-                  MAX[i]=MAX[i-1];
-              
-          }
-      }
-  }
-        return MAX[numsSize-1];  
-}
-    }
+	
+	
+	
+	
+	
+	
