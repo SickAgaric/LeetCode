@@ -180,3 +180,53 @@ public:
         return vector<int>(ret,ret+2);
     }
 };
+
+class Solution {
+public:
+    string convertToTitle(int n) {
+        
+        /*string str;
+        /*int i = 0;
+        if(n<27)
+        {
+            char ch = 'A'+n-1;
+            str.push_back(ch);
+            return str;
+        }
+        
+        /*while(n>26)
+        {
+            n = n-26;
+            
+            str.push_back('A');
+        }*/
+        /*while(n>26)
+        {
+            n-=26;
+            str += 'A'
+        }
+        
+        
+        
+        if(n>0)
+        {
+            char _ch = 'A'+(n-1);
+            str.push_back(_ch);
+        }
+        
+        return str;
+        */
+        
+        string s = "";
+        char c;
+        while(n)
+        {
+            c = (n-1)%26+'A';
+            s = c + s;//此处c+s为前插，s+c为后插也就是+=
+            n = (n-1)/26;
+            
+        }
+            
+        return s;
+    }
+};
