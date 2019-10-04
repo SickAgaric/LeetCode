@@ -78,7 +78,25 @@ public:
 };
 
 
-
+class Solution {
+public:
+    int titleToNumber(string s) {
+        
+        
+        int len = s.size()-1;
+        int num = 0;
+        int result = 0;
+        
+        for(int i = 0; i < s.size(); i++)
+        {
+            num = pow (26,len--)*(s[i]-'A'+1);
+            
+            result += num;
+        }
+        
+        return result;
+    }
+};
 
 
 
