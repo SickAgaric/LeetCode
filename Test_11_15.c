@@ -35,3 +35,29 @@ int main()
     }
     return 0;
 }
+
+class Solution {
+public:
+    string LeftRotateString(string str, int n) {
+        /*for(int i = 0;i < n;i++)
+        {
+            char a = str[0];
+            str[0] = str[(str.size()-1)];
+            str[(str.size()-1)] = a;
+        }*/
+        /*string new_str;
+        for(int i = n;i<str.size();i++)
+        {
+            new_str.push_back(str[i]);
+        }
+        
+        for(int i = 0;i<n;i++)
+        {
+            new_str.push_back(str[i]);
+        }
+        str = new_str;*/
+        
+        
+        
+    }
+};
