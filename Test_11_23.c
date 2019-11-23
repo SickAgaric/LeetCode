@@ -98,7 +98,7 @@ int main()
 			win = 0;
 
 		if (!win)
-			cout << "error" << endl;
+			cout << "ERROR" << endl;
 		else if (win == 1)
 		{
 			int i = 0;
