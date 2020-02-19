@@ -124,3 +124,87 @@ public:
         return sum;
     }
 };
+
+
+/**
+*  struct ListNode {
+*        int val;
+*        struct ListNode *next;
+*        ListNode(int x) :
+*              val(x), next(NULL) {
+*        }
+*  };
+*/
+class Solution {
+public:
+    vector<int> printListFromTailToHead(ListNode* head) {
+        vector<int> arr1;
+        while(head)
+        {
+            arr1.push_back(head->val);
+            head = head->next;
+        }
+        
+        int time = arr1.size()/2;
+        int begin = 0;
+        int end = arr1.size() - 1;
+        while(time--)
+        {
+            int tmp = arr1[begin];
+            arr1[begin] = arr1[end];
+            arr1[end] = tmp;
+            begin++;
+            end--;
+        }
+        //reverse(arr1.begin(),arr1.end());
+        
+        return arr1;
+    }
+};
+
+
+class Solution
+{
+public:
+    void push(int node) {
+        stack1.push(node);
+    }
+
+    int pop() {
+        if(stack2.empty())
+        {
+            while(!stack1.empty())
+            {
+                stack2.push(stack1.top());
+                stack1.pop();
+            }
+        }
+        int num = stack2.top();
+        stack2.pop();
+        
+        return num;
+    }
+
+private:
+    stack<int> stack1;
+    stack<int> stack2;
+};
+
+
+class Solution {
+public:
+     int  NumberOf1(int n) {
+         int count = 0;
+         if(n < 0)
+         {
+             n = n & 0x7FFFFFFF;
+             count++;
+         }
+         while(n)
+         {
+             count += (n & 1);
+             n = n >> 1;
+         }
+         return count;
+     }
+};
