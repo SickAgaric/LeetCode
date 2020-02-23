@@ -305,3 +305,44 @@ public:
         }
     }
 };
+
+class Solution {
+public:
+    ListNode* ReverseList(ListNode* pHead) {
+        stack<int> s1;
+        ListNode* tmp = pHead;
+        while(tmp)
+        {
+            s1.push(tmp->val);
+            tmp = tmp->next;
+        }
+        tmp = pHead;
+        while(tmp)
+        {
+            tmp->val = s1.top();
+            s1.pop();
+            tmp = tmp->next;
+        }
+        return pHead;
+    }
+};
+
+class Solution {
+public:
+    ListNode* ReverseList(ListNode* pHead) {
+       if(pHead == NULL)
+           return NULL;
+        ListNode* cur = pHead;
+        ListNode* pre = NULL;
+        ListNode* next = NULL;
+ 
+        while(cur)
+        {
+            next = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+};
