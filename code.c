@@ -208,3 +208,100 @@ public:
          return count;
      }
 };
+
+class Solution {
+public:
+    void reOrderArray(vector<int> &array) {
+        int begin = 0;
+        int end = array.size() - 1;
+        int tmp = 0;
+        while(begin <= end)
+        {
+            if(array[begin] % 2 != 0)
+                begin++;
+            if(array[end] % 2 == 0)
+                end--;
+            if(array[begin] % 2 == 0 && array[end] % 2 != 0)
+            {
+                tmp = array[begin];
+                array[begin] = array[end];
+                array[end] = tmp;
+            }
+        }
+    }
+};
+		
+
+class Solution {
+public:
+    void reOrderArray(vector<int> &array) {
+        vector<int> odd;
+        vector<int> even;
+        for(int i = 0;i < array.size();i++)
+        {
+            if(array[i] % 2 != 0)
+                odd.push_back(array[i]);
+            else
+                even.push_back(array[i]);
+        }
+        for(int i = 0;i < even.size();i++)
+            odd.push_back(even[i]);
+        array = odd;
+    }
+};		
+		
+		class Solution {
+public:
+    void reOrderArray(vector<int> &array) {
+        queue<int> odd;
+        queue<int> even;
+        for(int i = 0;i < array.size();i++)
+        {
+            if(array[i] % 2 != 0)
+               odd.push(array[i]);
+            else
+               even.push(array[i]);
+        }
+        for(int i = 0;i < array.size();++i)
+        {
+            if(!odd.empty())
+            {
+                array[i] = odd.front();
+                odd.pop();
+            }
+            else
+            {
+                array[i] = even.front();
+                even.pop();
+            }
+        }
+    }
+};
+
+class Solution {
+public:
+    double Power(double base, int exponent) {
+        if(base == 0 && exponent != 0)
+            return 0;
+        else if(base != 0 && exponent == 0)
+            return 1;
+        else
+        {
+            double result = base;
+            int sign = 0;
+            if(exponent < 0)
+            {
+                sign = 1;
+                exponent *= -1;
+            }
+            for(int i = 0;i < exponent - 1;++i)
+            {
+                result *= base;
+            }
+            if(sign == 0)
+                return result;
+            else
+                return 1/result;
+        }
+    }
+};
