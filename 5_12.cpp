@@ -82,3 +82,50 @@ public:
 	
 };
 
+
+
+
+class Solution {
+public:
+    void reverseOne(string& s)
+    {
+        char head = s[0];
+
+        for(int i = 0;i < s.size()-1;++i)
+        {
+            s[i] = s[i+1];
+        }
+        s[s.size()-1] = head;
+    }
+
+    string reverseLeftWords(string s, int n) {
+        while(n--)
+        {
+            reverseOne(s);
+        }
+        return s;
+    }
+};
+
+class Solution {
+public:
+    string reverseLeftWords(string s, int n) {
+
+        string newStr;
+        int i = n;
+        
+        int count = s.size()-n;
+        while(count--)
+        {
+            newStr.push_back(s[i++]);
+        }
+        int j = 0;
+        while(j<n)
+        {
+            newStr.push_back(s[j++]);
+        }
+        
+        return newStr;
+    }
+};
+
