@@ -129,3 +129,90 @@ public:
     }
 };
 
+class Solution {
+public:
+	vector<string> res;
+	bool judge(string a, string b)//判断是否相等
+	{
+		int time = b.size() - a.size();
+		for (int i = 0; i <= time;++i)
+		{
+			int j = 0;
+			int index = i;
+			for (; j < a.size(); j++)
+			{
+				if (a[j] != b[index])
+					break;
+				else
+				{
+					index++;
+				}
+			}
+			if (j == a.size())
+				return true;
+		}
+		return false;
+	}
+
+	bool find_str(vector<string> a,string b)
+	{
+		for (int i = 0; i < a.size(); ++i)
+		{
+			if (a[i] == b)
+				return false;
+		}
+		return true;
+	}
+
+	vector<string> stringMatching(vector<string>& words) {
+		
+		for (int i = 0; i < words.size(); ++i)
+		{
+			for (int j = 0; j < words.size(); ++j)
+			{
+				if (i != j)
+				{
+					if (words[i].size() < words[j].size())
+					{
+						if (judge(words[i], words[j]))
+						{
+							if (find_str(res,words[i]))//避免出现重复字符串
+								res.push_back(words[i]);
+						}	
+					}
+				}
+			}
+		}
+		return res;
+	}
+};
+
+
+
+
+class Solution {
+public:
+	int balancedStringSplit(string s) {
+		int numR = 0, numL = 0;
+		int count = 0;
+
+		for (int i = 0; i < s.size(); ++i)
+		{
+			
+			if (s[i] == 'R')
+				++numR;
+			else if (s[i] == 'L')
+				++numL;
+
+			if (numR == numL && numR != 0)
+			{
+				numL = 0;
+				numR = 0;
+				count++;
+			}
+		}
+		return count;
+	}
+};
+
+
