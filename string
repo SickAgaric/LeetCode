@@ -274,6 +274,27 @@ public:
 		return false;
 
 	}
+	
+	class Solution {
+public:
+	bool containsDuplicate(vector<int>& nums) {
+		map<int,int> S;
+
+		for (int i = 0; i<nums.size(); ++i)
+		{
+			S[nums[i]]++;
+		}
+
+
+
+		for (auto it = S.begin(); it != S.end(); ++it)
+		{
+			if (it->second > 1)
+				return true;
+		}
+		return false;
+	}
+};
 
 
 
