@@ -215,4 +215,65 @@ public:
 	}
 };
 
+class Solution {
+public:
+    bool isFlipedString(string s1, string s2) {
+        if(s1.size() == 0 && s2.size() == 0)
+            return true;
+        if(s1.size()!=s2.size()) 
+            return false;
+
+        s2 = s2 +s2;
+
+        for(int i = 0;i<s1.size();++i)
+        {
+            if(s1[0] == s2[i])
+            {
+                string tmp = s2.substr(i,s1.size());
+                if(s1 == tmp)
+                    return true;
+            }
+        }
+        return false;
+    }
+};
+
+	bool isFlipedString(string s1, string s2) {
+		if (s1.size() != s2.size())
+			return false;
+		
+		int index = 0;
+		while (s1[index] != s2[0])
+			index++;
+
+		
+		
+		int j = 0;
+		int i = index;
+		for (i = index; i < s1.size(); ++i)
+		{
+			
+			if (s1[i] == s2[j++])
+				continue;
+			else
+				break;
+		}
+		if (i == s1.size())
+		{
+			int i = 0, j = s2.size() - index;
+			while (index--)
+			{
+				if (s1[i++] != s2[j++])
+					break;
+			}
+			if (index == -1)
+				return true;
+			else
+				return false;
+		}
+		return false;
+
+	}
+
+
 
