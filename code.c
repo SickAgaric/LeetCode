@@ -407,3 +407,41 @@ public:
         return count;
     }
 };
+#define forp(i,s,n) for(int i=(s);i<(n);i++)
+class Solution {
+public:
+    string reorganizeString(string S) {
+        
+//记录字母数并降序排列
+        vector<pair<char,int>> h(26,make_pair('a',0));
+        
+        for(int i=0;i<26;i++)
+            h[i].first+=i;
+        for(char p:S)
+            h[p-'a'].second++;
+        sort(h.begin(),h.end(),[](pair<char,int> a,pair<char,int> b){return a.second>b.second;});
+        
+//判断是否能够重构
+        if(h[0].second>(S.size()+1)/2)
+            return "";
+        
+//答案有size个字符串拼接而成，轮转排入。
+        int size=h[0].second;
+        vector<string> ans(size);
+        int l=0;
+        
+        forp(i,0,26){
+            int n=h[i].second;
+            forp(j,0,n){
+                ans[l++%size].push_back(h[i].first);
+            }
+        }
+        
+        string res;
+        forp(i,0,size){
+            res+=ans[i];
+        }
+        
+        return res;
+    }
+};
