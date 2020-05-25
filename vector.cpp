@@ -37,3 +37,19 @@ public:
 		return true;
 	}
 };
+class Solution {
+public:
+    int arrayPairSum(vector<int>& nums) {
+        if(nums.size() == 0)
+            return false;
+        sort(nums.begin(),nums.end());
+
+        int i = 0;
+        int min = 0;
+
+        for(int i = 0;i<nums.size();i+=2)
+            min += nums[i];
+
+        return min;
+    }
+};
