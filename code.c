@@ -445,3 +445,102 @@ public:
         return res;
     }
 };
+
+
+
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
+
+#define Size 3
+#define TimeRange 2
+#define TimeDay 24
+
+int Calculation(int time)
+{
+	return time /= (60 * 60);
+}
+
+int main()
+{
+	//构建数组
+	int num = 0;
+	cin >> num;
+
+	vector<vector<int>> v;
+	v.resize(num);
+
+	for (int i = 0; i < v.size(); ++i)
+	{
+		v[i].resize(3);
+		for (int j = 0; j < Size; ++j)
+		{
+			cin >> v[i][j];
+		}
+	}
+
+	vector<int> arrT;
+	arrT.resize(TimeDay);
+
+	//计算
+	for (int i = 0; i < num; ++i)
+	{
+		int time = Calculation(v[i][1]), money = v[i][2];
+
+		arrT[time] += money;
+
+		if ((time - 1) < 0)
+			time = TimeDay - 1;
+		arrT[time] += money;
+	}
+
+
+	int resTime = 0, resMoney = arrT[0];
+	int index = 0;
+	for (int i = 1; i < TimeDay; ++i)
+	{
+		if (resMoney < arrT[i])
+		{
+			resMoney = arrT[i];
+			index = i;
+		}
+	}
+
+	for (int i = 0; i < num; ++i)
+	{
+		if (Calculation(v[i][1]) == index || (Calculation(v[i][1]) - 1) == index)
+		{
+			resTime = Calculation(v[i][1]);
+			break;
+		}
+	}
+	cout << resTime << resMoney << endl;
+
+	return 0;
+}
+
+
+//int main()
+//{
+//	int n, m;
+//	cin >> n >> m;
+//
+//	vector<vector<int>> v;
+//
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < m; ++j)
+//		{
+//			cin >> v[i][j];
+//		}
+//	}
+//
+//	/*2 3
+//	0 1 1
+//	1 1 0*/
+//
+//
+//	return 0;
+//}
