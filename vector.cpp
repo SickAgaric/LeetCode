@@ -237,3 +237,79 @@ public:
 			return "Pending";
 	}
 };
+class Solution {
+public:
+    string tictactoe(vector<string>& board) {
+        //检查行
+        int sumX = 0,sumO = 0,sumSp;
+        int len = board.size();
+        for(int row = 0;row < board.size(); ++row)
+        {
+            sumX = 0,sumO = 0;
+            for(int col = 0;col < len;++col)
+            {
+                if(board[row][col] == 'X')
+                    sumX++;
+                else if(board[row][col] == 'O')
+                    sumO++;
+                else if(board[row][col] == ' ')
+                    sumSp++;
+            }
+
+            if(sumX == board.size())
+                return "X";
+            if(sumO == board.size())
+                return "O";
+        }
+        //检查列
+        for(int col = 0;col < board.size();++col)
+        {
+            sumX = 0,sumO = 0;
+            for(int row = 0;row < len;++row)
+            {
+                if(board[row][col] == 'X')
+                    sumX++;
+                if(board[row][col] == 'O')
+                    sumO++;
+            }
+
+            if(sumX == board.size())
+                return "X";
+            if(sumO == board.size())
+                return "O";
+        }
+        //检查左起点
+        sumX = 0,sumO = 0;
+        for(int row = 0,col = 0;row < len; ++row,++col)
+        {
+            if(board[row][col] == 'X')
+                sumX++;
+            if(board[row][col] == 'O')
+                sumO++;
+        }
+        if(sumX == board.size())
+                return "X";
+        if(sumO == board.size())
+            return "O";
+
+        sumX = 0,sumO = 0;
+        //检查右起点
+        for(int row = 0,col = len-1;row < len; ++row,--col)
+        {
+            if(board[row][col] == 'X')
+                sumX++;
+            if(board[row][col] == 'O')
+                sumO++;
+        }
+        if(sumX == board.size())
+                return "X";
+        if(sumO == board.size())
+            return "O";
+        
+        if(sumSp == 0)
+            return "Draw";
+        else
+            return  "Pending";
+    }
+};
+
