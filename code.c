@@ -544,3 +544,60 @@ int main()
 //
 //	return 0;
 //}
+### 解题思路
+此处撰写解题思路
+
+### 代码
+
+```cpp
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> res;
+
+        if(nums1.size() < 1 && nums1.size() > 0)
+        {
+            if(nums2.size() % 2 == 1)
+                return (double)nums2[nums2.size()/2];
+            else
+                return (((double)nums2[nums2.size()/2-1] + (double)nums2[nums2.size()/2]) / 2);
+        }
+        if(nums2.size() < 1 && nums1.size() > 0)
+        {
+            if(nums1.size() % 2 == 1)
+                return (double)nums1[nums1.size()/2];
+            else
+                return (((double)nums1[nums1.size()/2-1] + (double)nums1[nums1.size()/2]) / 2);
+        }
+        
+        int index1 = 0,index2 = 0;
+        while(index1 < nums1.size() && index2 < nums2.size())
+        {
+            if(nums1[index1] <= nums2[index2])
+                res.push_back(nums1[index1++]);
+            else
+                res.push_back(nums2[index2++]);
+        }
+
+        if(index1 == nums1.size())
+        {
+            while(index2 < nums2.size())
+                res.push_back(nums2[index2++]);
+        }
+
+        if(index2 == nums2.size())
+        {
+            while(index1 < nums1.size())
+                res.push_back(nums1[index1++]);
+        }
+
+        int len = nums1.size() + nums2.size();
+
+        double n = 0;
+        if((len % 2) == 1)
+            return (double)(res[len/2]);
+        else
+            return (((double)res[len/2-1] + (double)res[len/2]) / 2);
+    }
+};
+```
