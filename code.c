@@ -600,4 +600,22 @@ public:
             return (((double)res[len/2-1] + (double)res[len/2]) / 2);
     }
 };
-```
+```class Solution {
+public:
+    int findMinFibonacciNumbers(int k) {
+        int ans=0, i=2;
+        vector<int> dp(2,1);
+        for(i=2; i<=k; i++) {
+            dp.push_back(dp[i-1] + dp[i-2]);
+            if(dp[i] > k) break;
+        }
+
+        for(i=dp.size()-1; i>=0; i--){
+            if(k >= dp[i]){
+                k-=dp[i];
+                ans++;
+            }
+        }
+        return ans;      
+    }
+};
