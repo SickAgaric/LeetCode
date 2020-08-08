@@ -619,3 +619,70 @@ public:
         return ans;      
     }
 };
+
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+
+int Bonusfunc(vector<int> arr)
+{
+	int pre = 0, next = 0, money = 0;
+	vector<int> tmp;
+	while (1)
+	{
+		pre = 0, next = pre + 1;
+		if (tmp.size() > 0)
+		{
+			arr.clear();
+			arr.resize(tmp.size());
+		}
+		for (int i = 0; i < tmp.size(); ++i)
+		{
+			arr[i] = tmp[i];
+		}
+		tmp.clear();
+		for (int i = 0; i < arr.size() - 1; ++i)
+		{
+			if (arr[pre] == arr[next])
+			{
+				arr[pre] = 0;
+				arr[next] += 1;
+				money++;
+				break;
+			}
+			else
+			{
+				pre++;
+				next++;
+			}
+		}
+
+		if (next >= arr.size())
+			break;
+		for (int i = 0; i < arr.size(); ++i)
+		{
+			if (arr[i] != 0)
+				tmp.push_back(arr[i]);
+		}
+	}
+
+	return money;
+}
+
+int main()
+{
+	int num;
+	cin >> num;
+	vector<int> arr;
+	arr.resize(num);
+	for (int i = 0; i < num; ++i)
+		cin >> arr[i];
+
+	cout << Bonusfunc(arr) << endl;
+
+	system("pause");
+	return 0;
+}
