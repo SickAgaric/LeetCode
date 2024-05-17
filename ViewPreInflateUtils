@@ -1,0 +1,86 @@
+package com.autohome.main.car.widget;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.autohome.commontools.android.concurrent.AHThreadPoolExecutor;
+
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+public class ViewPreInflateUtils {
+    private final static ViewPreInflateUtils utils = new ViewPreInflateUtils();
+
+    private final Map<Integer, ConcurrentLinkedQueue<View>> mViewMap = new HashMap();
+
+    private ViewPreInflateUtils() {
+
+    }
+
+    public static ViewPreInflateUtils getInstance() {
+        return utils;
+    }
+
+    /**
+     * 预加载view----------
+     *
+     * @param context     上下文
+     * @param layoutClass 父类的class
+     * @param layout      预存的xml
+     * @param num         预存数量
+     */
+    public void PreInflate(Context context, Class layoutClass, int layout, int num) {
+        AHThreadPoolExecutor.getInstance().execute(new Runnable() {
+
+            @Override
+            public void run() {
+                inflate(context, layoutClass, num, layout);
+            }
+        });
+    }
+
+    private void inflate(Context context, Class layoutClass, int num, int layout) {
+        ConcurrentLinkedQueue<View> views = mViewMap.get(layout);
+        if (views == null) {
+            views = new ConcurrentLinkedQueue<>();
+            mViewMap.put(layout, views);
+        }
+        views.clear();
+        for (int i = 0; i < num; i++) {
+            View preView = getPreView(context, layoutClass, layout);
+            if (preView != null) {
+                views.add(preView);
+            }
+        }
+    }
+
+    private View getPreView(Context context, Class layoutClass, int layout) {
+        if (context == null) {
+            return null;
+        } else {
+            Log.d("mvvm", "预加载view: " + layout);
+            try {
+                Constructor<ViewGroup> constructor = layoutClass.getConstructor(Context.class);
+                return LayoutInflater.from(context).inflate(layout, constructor.newInstance(context), false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public View getView(int layout) {
+        ConcurrentLinkedQueue<View> views = mViewMap.get(layout);
+        if (views != null && !views.isEmpty()) {
+            return views.poll();
+        }
+        return null;
+    }
+
+
+}
